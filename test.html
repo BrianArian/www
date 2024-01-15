@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: 'sf-pro-display-regular', sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+        margin-top: 100px;
+        background-attachment: fixed;
+    }
+
+
+    .card:hover {
+        background-color: #f0f0f0;
+    }
+
+    .container {
+        font-family: 'sf-pro-display-regular', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .container2 {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
+        max-width: 800px;
+        padding: 60px;
+        text-align: center;
+    }
+
+    /* Estilos para las tarjetas */
+    .card {
+        width: 95%;
+        margin: 10px;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #d8d8d8;
+        font-family: Candara;
+        font-size: 15px;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        /* Permite posicionar elementos secundarios */
+
+
+
+    }
+
+    .content {
+        display: none;
+        padding: 10px;
+        font-family: Candara;
+        font-size: 15px;
+    }
+
+    .content.open {
+        display: block;
+    }
+
+    /* Estilos para las tarjetas de registros */
+    .record-card {
+        margin: 10px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        font-family: Candara;
+        font-size: 15px;
+        justify-content: center;
+        margin-left: auto;
+
+    }
+
+    /* Estilos para las tarjetas de registros */
+    .record-card2 {
+        margin: 10px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        font-family: Candara;
+        font-size: 15px;
+        justify-content: center;
+        margin-left: auto;
+
+    }
+
+
+
+
+
+    /* Estilos para la barra de navegación */
+    .barra-navegacion {
+        background-color: #4D4E53;
+        /* Color de fondo de la barra de navegación */
+        color: #fff;
+        /* Color del texto */
+        display: flex;
+        justify-content: space-between;
+        /* Distribuye el contenido horizontalmente */
+        align-items: center;
+        /* Centra verticalmente el contenido */
+        padding: 10px 20px;
+        /* Espaciado interno */
+        margin-top: -120px;
+        margin-left: -25px;
+        margin-right: -20px;
+
+    }
+
+    /* Estilos para el logo */
+    .logo img {
+        max-height: 40px;
+        /* Altura máxima del logo */
+    }
+
+    /* Estilos para el título */
+    .titulo h1 {
+        font-size: 24px;
+        /* Tamaño de fuente del título */
+        margin: 0;
+        /* Elimina el margen predeterminado del título */
+    }
+
+    /* Estilos para el contenedor */
+    .home-container {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Estilos para el icono */
+    .home-icon {
+        margin-right: 10px;
+        /* Espacio entre el icono y el texto */
+        font-size: 24px;
+        /* Tamaño del icono */
+    }
+
+    /* Estilos para el contenedor principal */
+
+
+    /* Estilos para la columna izquierda */
+    .left-column {
+        width: 70%;
+        padding: 10px;
+    }
+
+    /* Estilos para la columna derecha (imagen) */
+    .right-column {
+        width: 30%;
+        text-align: center;
+        background-color: #f5f5f5;
+    }
+
+    /* Estilos para el contenido del card */
+    .card-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    /* Estilos para los botones */
+    .button {
+        display: block;
+        width: 8%;
+        background-color: #F0665E;
+        background-image: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+        margin-left: auto;
+    }
+
+    .button:hover {
+        background-color: #D9534F;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            width: 90%;
+        }
+    }
+
+    #redirectToPageButton {
+        position: absolute;
+        top: 70px;
+        /* Ajusta la distancia desde la parte superior */
+        right: 40px;
+        /* Ajusta la distancia desde la derecha */
+        padding: 10px 20px;
+        background-color: #F0665E;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    #redirectToPageButton2 {
+        position: absolute;
+        top: 70px;
+        /* Ajusta la distancia desde la parte superior */
+        right: 133px;
+        /* Ajusta la distancia desde la derecha */
+        padding: 10px 20px;
+        background-color: #BBBCBD;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+
+
+    }
+
+    h1 {
+        color: #efeded;
+        font-size: 50px;
+    }
+
+    label {
+        color: #333;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    .select-container {
+        position: relative;
+    }
+
+    .select-container select {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .options-container {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-top: none;
+        background-color: #fff;
+        border-radius: 0 0 5px 5px;
+        z-index: 1;
+    }
+
+    .option {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .option:hover {
+        background-color: #0070d2;
+        color: #fff;
+    }
+
+    .btn2 {
+        background-color: #F0665E;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .line-separator {
+        width: 70%;
+        border-top: 1px solid #000;
+        margin: 15px auto;
+    }
+
+    .center-text {
+        text-align: center;
+    }
+
+    .custom-input {
+        width: 90%;
+        max-width: 400px;
+        padding: 10px;
+        border: 2px solid #999B9D;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    /* Estilo para el input text al enfocar */
+    .custom-input:focus {
+        border-color: #999B9D;
+    }
+
+    .input-container {
+        position: relative;
+    }
+
+    input {
+        padding: 10px;
+        border: 2px solid rgb(81, 86, 90);
+        border-radius: 5px;
+        font-size: 16px;
+        width: 650px;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #2e6bcc;
+        /* Cambiar color del borde al enfocar */
+        box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+        /* Agregar sombra al enfocar */
+    }
+
+    select {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        width: 300px;
+    }
+
+    select:focus {
+        outline: rgb(81, 86, 90);
+        border-color: #2e6bcc;
+        /* Cambiar color del borde al enfocar */
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        /* Agregar sombra al enfocar */
+    }
+</style>
+
+<body>
+    <nav class="barra-navegacion">
+        <div class="logo">
+            <a href="https://ammperenergia--c.vf.force.com/apex/MedidoresCFEMain">
+                <apex:image url="https://ammper.com/wp-content/uploads/2020/07/ammper-logo.png" width="130" height="200"
+                    alt="Mi Imagen" />
+            </a>
+            <a href="https://ammperenergia.lightning.force.com/">
+                <apex:image
+                    url="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/1280px-Salesforce.com_logo.svg.png"
+                    width="70" height="40" alt="Mi Imagen" />
+            </a>
+        </div>
+
+        <div class="titulo">
+            <h1>Formulario Clientes</h1>
+        </div>
+    </nav>
+
+
+
+    <div class="home-container">
+
+    </div>
+    <br />
+    <form id="applicationForm">
+        <div class="container2">
+
+            <h2>Cuestionario Técnico | Ammper Gas Natural</h2>
+            <label for="">Este formulario tiene como objetivo conocer la información necesaria para realizar una
+                evaluación de factibilidad para el Suministro de Gas Natural por Nodo/Punto de Extracción.
+                Por favor contesta las siguientes preguntas con la información correspondiente.</label>
+
+            <div class="line-separator"></div><br />
+
+
+
+            <h3>Información de la Empresa</h3>
+
+
+
+            <div class="input-container">
+                <label for="">1.Ingresa tu correo electrónico</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q2" name="Q2" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">2.¿Cuál es la Razón Social de tu Empresa?</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q32" name="Q32" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">3.¿En qué Ubicación Geográfica se encuentra?</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q3" name="Q3" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">4.Inicio del Periodo de Suministro</label><br>
+                <input type="date" placeholder="Ingresa tu texto" id="Q4" name="Q4" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">5.Término del Periodo de Suministro</label><br>
+                <input type="date" placeholder="Ingresa tu texto" id="Q5" name="Q5" required>
+            </div><br>
+            <h3>Relativo a la Molécula de Gas Natural</h3>
+
+            <div class="input-container">
+                <label for="">6.¿Cuál es la Capacidad Máxima Diaria (CDM) de Consumo en Gigajoules o MMBtu?</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q6" name="Q6" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">7.¿El Servicio de Suministro Firme es Flat o Escalonado?</label><br>
+                <label for="">1.Suministro Flat se refiere a que durante la vigencia del periodo se suministra la misma
+                    cantidad de Gas Natural.
+                    2.Suministro Escalonado se refiere a que durante la vigencia del periodo se suministra la cantidad
+                    de gas natural que el cliente solicite conforme al procedimiento que se acuerde entre las
+                    partes.</label><br>
+
+                <label for="Q7">Selecciona una opción:</label>
+                <select id="Q7" name="Q7" multiple required>
+                    <option value="Flat">Flat</option>
+                    <option value="Escalonado">Escalonado</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">8.¿Cuál es la Cantidad Diaria para Suministro en Firme en Gigajoules o MMBtu?</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q8" name="8" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">9.¿Cuál es la Cantidad Diaria para Suministro Variable en Gigajoules o MMBtu?</label><br>
+                <label for="">Una vez que se establece la cantidad de Gas Natural firme diaria (CFD) para un mes de
+                    flujo específico, la cantidad de Gas Natural variable puede ir desde 0 (cero) hasta un máximo de
+                    [CMD – CFD].</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q9" name="Q9" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">10.¿Se requerirá servicio de Reventas/Recompras de Gas Natural Incluído?</label><br>
+                <label for="">Ammper Gas le re-compra al cliente y revende en el mercado las cantidades de Gas Natural
+                    que no serán requeridas por el cliente y que estarán sujetas al mejor esfuerzo comercial del
+                    suministrador, considerando las condiciones operativas y comerciales del mercado.</label><br>
+
+                <label for="Q10">Selecciona una opción:</label>
+                <select id="Q10" name="Q10" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">11.¿Se requerirá servicio de Suministro de Gas Natural Intraday Incluido?</label><br>
+                <label for="">Suministro de cantidades de Gas Natural requeridas por el Cliente para un día de flujo
+                    específico después de que el horario del Primer Ciclo de Nominación para dicho día de flujo ya
+                    terminó, y que estarán sujetas al mejor esfuerzo comercial del suministrador considerando las
+                    condiciones operativas y comerciales del mercado.</label><br>
+
+                <label for="Q11">Selecciona una opción:</label>
+                <select id="Q11" name="Q11" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <h3>Relativo al Transporte de Gas natural</h3>
+
+            <div class="input-container">
+                <label for="">12.¿Cuentas con Capacidad Interrumpible de Transporte?</label><br>
+
+                <label for="Q12">Selecciona una opción:</label>
+                <select id="Q12" name="Q12" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">13.Si tu respuesta a la pregunta 12 es "Sí" indica tú Capacidad Interrumpible de
+                    Transporte en Gigajoules o MMBtu</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q13" name="Q13">
+            </div><br>
+            <div class="input-container">
+                <label for="">14.¿Cuentas con Capacidad Firme de Transporte?</label><br>
+
+                <label for="Q14">Selecciona una opción:</label>
+                <select id="Q14" name="Q14" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">15.Si tu respuesta a la pregunta 14 es "Sí" Indica la Capacidad Firme de Transporte en
+                    Gigajoules o MMBtu</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q15" name="Q15">
+            </div><br>
+            <h3>Ruta de Transporte</h3>
+            <div class="input-container">
+                <label for="">16.SISTRANGAS</label><br>
+
+                <label for="Q16">Selecciona una opción:</label>
+                <select id="Q16" name="Q16" multiple required>
+                    <option value="Firme">Firme</option>
+                    <option value="Interrumpible">Interrumpible</option>
+                    <option value="Combinación de ambos esquemas">Combinación de ambos esquemas</option>
+
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">17.Indica el Nodo Comercial de Inyección de SISTRANGAS al que te encuentras
+                    conectado</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q17" name="Q17" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">18.Indica el Nodo Comercial de Extracción de SISTRANGAS al que te encuentras
+                    conectado</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q18" name="Q18" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">19.Gasoducto Privado</label><br>
+
+                <label for="Q19">Selecciona una opción:</label>
+                <select id="Q19" name="Q19" multiple required>
+                    <option value="Firme">Firme</option>
+                    <option value="Interrumpible">Interrumpible</option>
+
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">20.Indica el Punto de Inyección</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q20" name="Q20" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">21.Indica el Punto de Extracción</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="21" name="Q21" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">22.¿Cuentas con una Interconexión a algún Servicio de Distribución?</label><br>
+
+                <label for="Q22">Selecciona una opción:</label>
+                <select id="Q22" name="Q22" multiple required>
+                    <option value="opcion1">Sí</option>
+                    <option value="opcion2">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">23.Indica el Nombre del Distribuidor</label><br>
+                <input type="text" placeholder="Ingresa tu texto" id="Q23" name="Q23" required>
+            </div><br>
+            <div class="input-container">
+                <label for="">24.¿Tienes firmado un Procedimiento de Asignación Predeterminada (PAP)?</label><br>
+
+                <label for="Q24">Selecciona una opción:</label>
+                <select id="Q24" name="Q24" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <h3>Servicios Agregados de Gas Natural</h3>
+
+            <div class="input-container">
+                <label for="">25.Optimización de Capacidades Firmes de Transporte de Gas Natural</label><br>
+                <label for="">Colocación en el mercado de todo o parte de esa capacidad de transporte no utilizada, a
+                    efecto de que el cliente siempre tenga la opción de utilizar su capacidad total conforme al
+                    procedimiento que se acuerde entre las partes.</label><br>
+
+                <label for="Q25">Selecciona una opción:</label>
+                <select id="Q25" name="Q25" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">26.Servicios de Estacionamiento y Préstamo de Gas Natural conforme a los Términos y
+                    Condiciones para el Servicio de Transporte aplicables</label><br>
+                <label for="">Servicios de Estacionamiento y Préstamo de cantidades de Gas Natural sujetas a las
+                    condiciones operativas del sistema y tarifas aplicables.</label><br>
+
+                <label for="Q26">Selecciona una opción:</label>
+                <select id="Q26" name="Q26" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">27.Administración de Desbalances Operativos de Gas Natural</label><br>
+                <label for="">Le permite al cliente minimizar el impacto financiero con relación a las cantidades de Gas
+                    Natural acumuladas como resultado de las diferencias entre la entrega confirmada contra el consumo
+                    real, sujeto a las condiciones operativas del sistema y tarifas aplicables.</label><br>
+
+                <label for="Q27">Selecciona una opción:</label>
+                <select id="Q27" name="Q27" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="">28.Gestión de Contratos y Nominación de Gas Natural</label><br>
+                <label for="">Realizamos las actividades de Front Office y Back Office respecto de sus obligaciones y
+                    derechos contractuales con los distintos prestadores de servicios que intervengan en su cadena de
+                    suministro de Gas Natural.</label><br>
+
+                <label for="Q28">Selecciona una opción:</label>
+                <select id="Q28" name="Q28" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="29">29.Instrumentos Financieros de Cobertura de Precios</label><br>
+                <label for="29">Ammper Gas ofrece el servicio de Instrumentos Financieros de Coberturas de Precio del
+                    Gas Natural con el objeto de mitigar el efecto de la volatilidad del precio de este hidrocarburo en
+                    beneficio del Cliente.</label><br>
+
+                <label for="Q29">Selecciona una opción:</label>
+                <select id="Q29" name="Q29" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <div class="input-container">
+                <label for="30">30.Financiamiento de Pagos</label><br>
+                <label for="30">Establecimiento de un mecanismo de pagos acorde a sus necesidades financieras dentro del
+                    período de vigencia del contrato de suministro de gas natural y los servicios asociados al
+                    transporte de Gas Natural.</label><br>
+
+                <label for="Q30">Selecciona una opción:</label>
+                <select id="Q30" name="Q30" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br>
+            <h3>Información adicional / complementaria</h3>
+
+            <div class="input-container">
+                <label for="31">31.Estoy de acuerdo en compartir mi recibo / contrato de Gas Natural con
+                    Ammper</label><br>
+
+                <label for="Q31">Selecciona una opción:</label>
+                <select id="Q31" name="Q31" multiple required>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div><br><br>
+
+
+            <div class="input-container">
+                <label for="31">32.Adjunta tus documentos</label><br>
+                <label for="FileInput_MLetter" class="form-label">File</label>
+                <input type="file" class="form-control" id="FileInput_MLetter" name="motivationLetter" accept=".pdf"
+                    required>
+
+            </div><br><br>
+
+
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+
+    </form>
+
+
+
+    </div>
+    <script type="text/javascript">
+        async function handleFormSubmission(event) {
+            event.preventDefault();
+            const form = document.getElementById("applicationForm");
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const motivationLetter_fileContent = await new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.onload = (event) => resolve(event.target.result);
+                fileReader.onerror = (error) => reject(error);
+                fileReader.readAsDataURL(data.motivationLetter);
+            });
+            const formattedData = {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                emailAddress: data.emailAddress,
+                Q1: data.Q1,
+                Q2: data.Q2,
+                Q3: data.Q3,
+                Q4: data.Q4,
+                Q5: data.Q5,
+                Q6: data.Q6,
+                Q7: data.Q7,
+                Q8: data.Q8,
+                Q9: data.Q9,
+                Q10: data.Q10,
+                Q11: data.Q11,
+                Q12: data.Q12,
+                Q13: data.Q13,
+                Q14: data.Q14,
+                Q15: data.Q15,
+                Q16: data.Q16,
+                Q17: data.Q17,
+                Q18: data.Q18,
+                Q19: data.Q19,
+                Q21: data.Q21,
+                Q22: data.Q22,
+                Q23: data.Q23,
+                Q24: data.Q24,
+                Q25: data.Q25,
+                Q26: data.Q26,
+                Q27: data.Q27,
+                Q28: data.Q28,
+                Q29: data.Q29,
+                Q30: data.Q30,
+                Q31: data.Q31,
+                Q32: data.Q32,
+
+
+                motivationLetter: {
+                    fileName: data.motivationLetter.name,
+                    fileType: data.motivationLetter.type,
+                    fileContent: motivationLetter_fileContent
+
+                }
+            };
+
+            fetch("https://prod-39.westus.logic.azure.com:443/workflows/fd1bad3245224c5981208294222fe707/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=0GB9DOuuznHJ6DcmU7Gm_4qVh5MTpZIkctiFW3l8p3c", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formattedData)
+            });
+
+            const root = document.getElementById("root");
+            root.innerHTML = "<h1> Muchas gracias por su aplicación.</h1>";
+
+        }
+
+        window.onload = () => {
+            const form = document.getElementById("applicationForm");
+            form.addEventListener("submit", (event) => handleFormSubmission(event));
+        }
+
+
+    </script>
+</body>
+
+</html>
