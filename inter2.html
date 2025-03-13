@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo...</title>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+</head>
+<body>
+
+    <h2 id="status">Obteniendo tus datossss... 🔄</h2>
+
+    <script>
+        // Función para detectar si la página está dentro de Teams
+        function isInTeams() {
+            try {
+                return window.self !== window.top; // Si es un iframe, está dentro de Teams
+            } catch (e) {
+                return false;
+            }
+        }
+
+        if (!isInTeams()) {
+            document.getElementById("status").innerText = "⚠ No estás en Teams. Intenta abrir este enlace dentro de la aplicación de Microsoft Teams.";
+        } else {
+            // Inicializar Microsoft Teams SDK
+            microsoftTeams.app.initialize().then(() => {
+                document.getElementById("status").innerText = "Conectando con Teams...";
+
+                // Obtener el contexto del usuario
+                microsoftTeams.app.getContext().then((context) => {
+                    let name = encodeURIComponent(context.user.displayName || "Usuario Desconocido");
+                    let email = encodeURIComponent(context.user.userPrincipalName || "No disponible");
+
+                    // URL del formulario final con los datos del usuario
+                    let formularioFinal = "https://brianarian.github.io/www/sdk.html";
+                    let redirigirA = `${formularioFinal}?name=${name}&email=${email}`;
+
+                    // Mostrar mensaje antes de redirigir
+                    document.getElementById("status").innerText = "Redirigiendo al formulario...";
+
+                    // Redirigir después de 1 segundo para evitar problemas de carga
+                    setTimeout(() => {
+                        window.location.href = redirigirA;
+                    }, 1000);
+                }).catch(err => {
+                    console.error("Error obteniendo contexto de Teams:", err);
+                    document.getElementById("status").innerText = "⚠ No pudimos obtener tus datos. Intenta abrir esto dentro de Microsoft Teamsss.";
+                });
+            }).catch(err => {
+                console.error("Error inicializando Teams SDK:", err);
+                document.getElementById("status").innerText = "⚠ No se pudo conectar con Teams. Asegúrate de abrir esto dentro de Microsoft Teamssss.";
+            });
+        }
+    </script>
+
+</body>
+</html>
