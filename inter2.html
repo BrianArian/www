@@ -8,13 +8,13 @@
 </head>
 <body>
 
-    <h2 id="status">Obteniendo tus datossss... 🔄</h2>
+    <h2 id="status">Obteniendo tus datos... 🔄</h2>
 
     <script>
-        // Función para detectar si la página está dentro de Teams
+        // Verificar si estamos dentro de Teams
         function isInTeams() {
             try {
-                return window.self !== window.top; // Si es un iframe, está dentro de Teams
+                return window.self !== window.top; // Si la ventana no es la principal, estamos en Teams (modo iframe)
             } catch (e) {
                 return false;
             }
@@ -22,13 +22,18 @@
 
         if (!isInTeams()) {
             document.getElementById("status").innerText = "⚠ No estás en Teams. Intenta abrir este enlace dentro de la aplicación de Microsoft Teams.";
+            console.log("❌ No se detectó Teams. La página está en un navegador externo.");
         } else {
+            console.log("✅ Se detectó Teams. Intentando obtener datos del usuario...");
+
             // Inicializar Microsoft Teams SDK
             microsoftTeams.app.initialize().then(() => {
-                document.getElementById("status").innerText = "Conectando con Teams...";
+                console.log("✅ SDK de Teams inicializado.");
 
                 // Obtener el contexto del usuario
                 microsoftTeams.app.getContext().then((context) => {
+                    console.log("🎯 Contexto obtenido:", context);
+
                     let name = encodeURIComponent(context.user.displayName || "Usuario Desconocido");
                     let email = encodeURIComponent(context.user.userPrincipalName || "No disponible");
 
@@ -36,20 +41,19 @@
                     let formularioFinal = "https://brianarian.github.io/www/sdk.html";
                     let redirigirA = `${formularioFinal}?name=${name}&email=${email}`;
 
-                    // Mostrar mensaje antes de redirigir
                     document.getElementById("status").innerText = "Redirigiendo al formulario...";
+                    console.log(`🔄 Redirigiendo a: ${redirigirA}`);
 
-                    // Redirigir después de 1 segundo para evitar problemas de carga
                     setTimeout(() => {
                         window.location.href = redirigirA;
-                    }, 1000);
+                    }, 1500);
                 }).catch(err => {
-                    console.error("Error obteniendo contexto de Teams:", err);
-                    document.getElementById("status").innerText = "⚠ No pudimos obtener tus datos. Intenta abrir esto dentro de Microsoft Teamsss.";
+                    console.error("⚠ Error obteniendo contexto de Teams:", err);
+                    document.getElementById("status").innerText = "⚠ No pudimos obtener tus datos. Intenta abrir esto dentro de Microsoft Teams.";
                 });
             }).catch(err => {
-                console.error("Error inicializando Teams SDK:", err);
-                document.getElementById("status").innerText = "⚠ No se pudo conectar con Teams. Asegúrate de abrir esto dentro de Microsoft Teamssss.";
+                console.error("⚠ Error inicializando Teams SDK:", err);
+                document.getElementById("status").innerText = "⚠ No se pudo conectar con Teams. Asegúrate de abrir esto dentro de Microsoft Teams.";
             });
         }
     </script>
