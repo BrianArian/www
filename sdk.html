@@ -50,7 +50,7 @@
 </head>
 <body>
 
-    <h2>Formulario en Microsoft Teams</h2>
+    <h2>Formulario en Microsoft Teamsaa</h2>
 
     <form id="userForm">
         <label for="name">Nombre:</label>
@@ -63,20 +63,21 @@
     </form>
 
     <script>
-        // Inicializar la app de Microsoft Teams
-        microsoftTeams.app.initialize().then(() => {
-            // Obtener el contexto del usuario
-            microsoftTeams.app.getContext().then((context) => {
-                document.getElementById("name").value = context.user.displayName || "No disponible";
-                document.getElementById("email").value = context.user.userPrincipalName || "No disponible";
-            }).catch(err => {
-                console.error("Error obteniendo contexto de Teams:", err);
-            });
+        // Función para obtener parámetros de la URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Llenar los campos automáticamente si los parámetros existen
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("name").value = getQueryParam("name") || "";
+            document.getElementById("email").value = getQueryParam("email") || "";
         });
 
         // Manejar el envío del formulario
         document.getElementById("userForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Evitar recarga de página
             
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
