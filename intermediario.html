@@ -11,34 +11,47 @@
     <h2 id="status">Obteniendo tus datossss... 🔄</h2>
 
     <script>
-        // Inicializar Microsoft Teams SDK
-        microsoftTeams.app.initialize().then(() => {
-            document.getElementById("status").innerText = "Conectando con Teams...";
+        // Función para detectar si la página está dentro de Teams
+        function isInTeams() {
+            try {
+                return window.self !== window.top; // Si es un iframe, está dentro de Teams
+            } catch (e) {
+                return false;
+            }
+        }
 
-            // Obtener el contexto del usuario
-            microsoftTeams.app.getContext().then((context) => {
-                let name = encodeURIComponent(context.user.displayName || "Usuario Desconocido");
-                let email = encodeURIComponent(context.user.userPrincipalName || "No disponible");
+        if (!isInTeams()) {
+            document.getElementById("status").innerText = "⚠ No estás en Teams. Intenta abrir este enlace dentro de la aplicación de Microsoft Teams.";
+        } else {
+            // Inicializar Microsoft Teams SDK
+            microsoftTeams.app.initialize().then(() => {
+                document.getElementById("status").innerText = "Conectando con Teams...";
 
-                // URL del formulario final con los datos del usuario
-                let formularioFinal = "https://brianarian.github.io/www/sdk.html";
-                let redirigirA = `${formularioFinal}?name=${name}&email=${email}`;
+                // Obtener el contexto del usuario
+                microsoftTeams.app.getContext().then((context) => {
+                    let name = encodeURIComponent(context.user.displayName || "Usuario Desconocido");
+                    let email = encodeURIComponent(context.user.userPrincipalName || "No disponible");
 
-                // Mostrar mensaje antes de redirigir
-                document.getElementById("status").innerText = "Redirigiendo al formulario...";
+                    // URL del formulario final con los datos del usuario
+                    let formularioFinal = "https://brianarian.github.io/www/sdk.html";
+                    let redirigirA = `${formularioFinal}?name=${name}&email=${email}`;
 
-                // Redirigir después de 1 segundo para evitar problemas de carga
-                setTimeout(() => {
-                    window.location.href = redirigirA;
-                }, 1000);
+                    // Mostrar mensaje antes de redirigir
+                    document.getElementById("status").innerText = "Redirigiendo al formulario...";
+
+                    // Redirigir después de 1 segundo para evitar problemas de carga
+                    setTimeout(() => {
+                        window.location.href = redirigirA;
+                    }, 1000);
+                }).catch(err => {
+                    console.error("Error obteniendo contexto de Teams:", err);
+                    document.getElementById("status").innerText = "⚠ No pudimos obtener tus datos. Intenta abrir esto dentro de Microsoft Teamsss.";
+                });
             }).catch(err => {
-                console.error("Error obteniendo contexto de Teams:", err);
-                document.getElementById("status").innerText = "⚠ No pudimos obtener tus datos. Intenta abrir esto dentro de Microsoft Teams.";
+                console.error("Error inicializando Teams SDK:", err);
+                document.getElementById("status").innerText = "⚠ No se pudo conectar con Teams. Asegúrate de abrir esto dentro de Microsoft Teamssss.";
             });
-        }).catch(err => {
-            console.error("Error inicializando Teams SDK:", err);
-            document.getElementById("status").innerText = "⚠ No se pudo conectar con Teams. Asegúrate de abrir esto dentro de Microsoft Teams.";
-        });
+        }
     </script>
 
 </body>
