@@ -8,26 +8,36 @@
 </head>
 <body>
 
-    <h2>Obteniendo tus datos... 🔄</h2>
+    <h2 id="status">Obteniendo tus datos... 🔄</h2>
 
     <script>
-        // Inicializar la app de Microsoft Teams
+        // Inicializar Microsoft Teams SDK
         microsoftTeams.app.initialize().then(() => {
+            document.getElementById("status").innerText = "Conectando con Teams...";
+
             // Obtener el contexto del usuario
             microsoftTeams.app.getContext().then((context) => {
                 let name = encodeURIComponent(context.user.displayName || "Usuario Desconocido");
                 let email = encodeURIComponent(context.user.userPrincipalName || "No disponible");
 
                 // URL del formulario final con los datos del usuario
-                let formularioFinal = "https://brianarian.github.io/www/sdk4.html";
+                let formularioFinal = "https://brianarian.github.io/www/sdk.html";
                 let redirigirA = `${formularioFinal}?name=${name}&email=${email}`;
 
-                // Redirigir al usuario al formulario con sus datos
-                window.location.href = redirigirA;
+                // Mostrar mensaje antes de redirigir
+                document.getElementById("status").innerText = "Redirigiendo al formulario...";
+
+                // Redirigir después de 1 segundo para evitar problemas de carga
+                setTimeout(() => {
+                    window.location.href = redirigirA;
+                }, 1000);
             }).catch(err => {
                 console.error("Error obteniendo contexto de Teams:", err);
-                document.body.innerHTML = "<h2>No pudimos obtener tus datos. Intenta abrir esto desde Microsoft Teams.</h2>";
+                document.getElementById("status").innerText = "⚠ No pudimos obtener tus datos. Intenta abrir esto dentro de Microsoft Teams.";
             });
+        }).catch(err => {
+            console.error("Error inicializando Teams SDK:", err);
+            document.getElementById("status").innerText = "⚠ No se pudo conectar con Teams. Asegúrate de abrir esto dentro de Microsoft Teams.";
         });
     </script>
 
