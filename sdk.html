@@ -67,8 +67,8 @@
         microsoftTeams.app.initialize().then(() => {
             // Obtener el contexto del usuario
             microsoftTeams.app.getContext().then((context) => {
-                document.getElementById("name").value = context.user.displayName;
-                document.getElementById("email").value = context.user.userPrincipalName;
+                document.getElementById("name").value = context.user.displayName || "No disponible";
+                document.getElementById("email").value = context.user.userPrincipalName || "No disponible";
             }).catch(err => {
                 console.error("Error obteniendo contexto de Teams:", err);
             });
@@ -76,20 +76,12 @@
 
         // Manejar el envío del formulario
         document.getElementById("userForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar recarga de página
+            event.preventDefault();
             
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
 
-            // Enviar los datos a un servidor
-            fetch("https://tudominio.com/api/guardar-formulario", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email })
-            })
-            .then(response => response.json())
-            .then(data => alert("Formulario enviado con éxito"))
-            .catch(error => console.error("Error enviando formulario:", error));
+            alert(`Formulario enviado:\nNombre: ${name}\nCorreo: ${email}`);
         });
     </script>
 
