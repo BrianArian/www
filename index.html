@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Pago</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Solicitud de Pago a Proveedor</h1>
+        
+        <form id="formPago">
+            <!-- Campo de correo del usuario -->
+            <div class="user-email-container">
+                <div class="user-email-wrapper">
+                    <label for="userEmail">Correo electrónico del solicitante:</label>
+                    <input 
+                        type="email" 
+                        id="userEmail" 
+                        name="userEmail" 
+                        required
+                        placeholder="nombre@empresa.com"
+                    >
+                </div>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <div class="form-group">
+                <label for="nombreProveedor">1. Nombre del Proveedor:</label>
+                <input 
+                    type="text" 
+                    id="nombreProveedor" 
+                    name="nombreProveedor" 
+                    placeholder="Escribe nombre corto o razón social" 
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <p class="question">2. ¿El proveedor está dado de alta?</p>
+                <div class="toggle-container">
+                    <input type="radio" id="proveedorSi" name="proveedorAlta" value="si" required>
+                    <label for="proveedorSi" class="toggle-button">Sí</label>
+
+                    <input type="radio" id="proveedorNo" name="proveedorAlta" value="no" required>
+                    <label for="proveedorNo" class="toggle-button">No</label>
+                </div>
+            </div>
+
+            <!-- Opción cuando la respuesta es SÍ -->
+            <div id="opcionSi" class="form-group" style="display: none;">
+                <label for="razonSocial">3. Razón social a la que se registra el gasto:</label>
+                <select id="razonSocial" name="razonSocial" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="ASE">ASE</option>
+                    <option value="AG">AG</option>
+                    <option value="AGD">AGD</option>
+                    <option value="AE">AE</option>
+                    <option value="ENERPYME">ENERPYME</option>
+                </select>
+            </div>
+
+            <!-- Opción cuando la respuesta es NO -->
+            <div id="opcionNo" class="form-group" style="display: none;">
+                <p class="question">3. Solicitar los documentos al proveedor para iniciar su alta:</p>
+                
+                <div class="docs-container">
+                    <div class="doc-item">
+                        <label for="inputRazonSocial">Razón Social:</label>
+                        <input type="text" id="inputRazonSocial" name="inputRazonSocial">
+                    </div>
+
+                    <div class="doc-item">
+                        <label for="inputRFC">RFC:</label>
+                        <input type="text" id="inputRFC" name="inputRFC">
+                    </div>
+
+                    <fieldset class="contact-info">
+                        <legend>Información de Contacto</legend>
+                        <div class="contact-inputs">
+                            <div class="input-group">
+                                <label for="inputNombre">Nombre:</label>
+                                <input type="text" id="inputNombre" name="inputNombre">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="inputEmail">Correo electrónico:</label>
+                                <input type="email" id="inputEmail" name="inputEmail">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="inputTelefono">Teléfono:</label>
+                                <input type="tel" id="inputTelefono" name="inputTelefono">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <!-- Después del div opcionSi, agregamos: -->
+            <div id="preguntaOrdenInterna" class="form-group" style="display: none;">
+                <p class="question">4. ¿Existe orden interna?</p>
+                <div class="toggle-container">
+                    <input type="radio" id="ordenSi" name="ordenInterna" value="si" required>
+                    <label for="ordenSi" class="toggle-button">Sí</label>
+
+                    <input type="radio" id="ordenNo" name="ordenInterna" value="no" required>
+                    <label for="ordenNo" class="toggle-button">No</label>
+                </div>
+            </div>
+
+            <div id="detallesOrdenInterna" class="form-group" style="display: none;">
+                <fieldset class="orden-interna-info">
+                    <legend>Orden Interna</legend>
+                    <div class="input-group">
+                        <label for="folioOrden">Folio de orden interna:</label>
+                        <input type="text" id="folioOrden" name="folioOrden" maxlength="20">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="descripcionServicio">Descripción breve del producto o servicio:</label>
+                        <textarea id="descripcionServicio" name="descripcionServicio" rows="3"></textarea>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Después del div detallesOrdenInterna (que es para cuando la respuesta es Sí), agregamos: -->
+            <div id="detallesOrdenInternaNo" class="form-group" style="display: none;">
+                <fieldset class="orden-interna-info">
+                    <legend>Información del Proyecto</legend>
+                    <div class="input-group">
+                        <label for="nombreProyecto">Nombre del proyecto:</label>
+                        <input type="text" id="nombreProyecto" name="nombreProyecto" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="ingresoProyecto">Ingreso:</label>
+                        <input 
+                            type="number" 
+                            id="ingresoProyecto" 
+                            name="ingresoProyecto" 
+                            step="0.01" 
+                            min="0" 
+                            required
+                            placeholder="$0.00"
+                        >
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="costoProyecto">Costo:</label>
+                        <input 
+                            type="number" 
+                            id="costoProyecto" 
+                            name="costoProyecto" 
+                            step="0.01" 
+                            min="0" 
+                            required
+                            placeholder="$0.00"
+                        >
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Después del div detallesOrdenInterna -->
+            <div class="form-group">
+                <p class="question">5. ¿El producto o servicio ya se entregó o se realizó?</p>
+                <div class="toggle-container">
+                    <input type="radio" id="entregaSi" name="entregaRealizada" value="si" required>
+                    <label for="entregaSi" class="toggle-button">Sí</label>
+
+                    <input type="radio" id="entregaNo" name="entregaRealizada" value="no" required>
+                    <label for="entregaNo" class="toggle-button">No</label>
+                </div>
+            </div>
+
+            <div id="documentosEntregaSi" class="form-group" style="display: none;">
+                <fieldset class="documentos-info">
+                    <legend>Documentos Requeridos</legend>
+                    <p class="upload-instruction">Por favor, cargue los siguientes documentos:</p>
+                    <div class="file-upload-container">
+                        <div class="file-group">
+                            <label for="factura">Factura:</label>
+                            <input type="file" id="factura" name="factura" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                        <div class="file-group">
+                            <label for="cotizacion1">Cotización:</label>
+                            <input type="file" id="cotizacion1" name="cotizacion1" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                        <div class="file-group">
+                            <label for="soporte">Reporte de entrega o soporte:</label>
+                            <input type="file" id="soporte" name="soporte" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div id="documentosEntregaNo" class="form-group" style="display: none;">
+                <fieldset class="documentos-info">
+                    <legend>Documentos Requeridos</legend>
+                    <p class="upload-instruction">Por favor, cargue los siguientes documentos:</p>
+                    <div class="file-upload-container">
+                        <div class="file-group">
+                            <label for="cotizacion2">Cotización y/o Factura:</label>
+                            <input type="file" id="cotizacion2" name="cotizacion2" accept=".pdf,.jpg,.jpeg,.png" multiple required>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Botón de enviar -->
+            <div class="form-group submit-container">
+                <button type="submit" class="submit-button">
+                    Enviar Solicitud
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const radioButtons = document.querySelectorAll('input[name="proveedorAlta"]');
+        const opcionSi = document.getElementById('opcionSi');
+        const opcionNo = document.getElementById('opcionNo');
+        const preguntaOrdenInterna = document.getElementById('preguntaOrdenInterna');
+        const detallesOrdenInterna = document.getElementById('detallesOrdenInterna');
+    
+        // Función para manejar el cambio en los radio buttons de proveedor
+        function handleRadioChange(e) {
+            if (e.target.value === 'si') {
+                opcionSi.style.display = 'block';
+                opcionNo.style.display = 'none';
+                preguntaOrdenInterna.style.display = 'block';
+                document.getElementById('razonSocial').required = true;
+                resetOpcionNo();
+            } else {
+                opcionSi.style.display = 'none';
+                opcionNo.style.display = 'block';
+                preguntaOrdenInterna.style.display = 'block';
+                document.getElementById('razonSocial').required = false;
+                document.getElementById('razonSocial').value = '';
+                resetOrdenInterna();
+            }
+        }
+    
+        // Función para manejar el cambio en los radio buttons de orden interna
+        function handleOrdenInternaChange(e) {
+            const detallesOrdenInternaSi = document.getElementById('detallesOrdenInterna');
+            const detallesOrdenInternaNo = document.getElementById('detallesOrdenInternaNo');
+            
+            if (e.target.value === 'si') {
+                detallesOrdenInternaSi.style.display = 'block';
+                detallesOrdenInternaNo.style.display = 'none';
+                document.getElementById('folioOrden').required = true;
+                document.getElementById('descripcionServicio').required = true;
+                resetDetallesOrdenInternaNo();
+            } else {
+                detallesOrdenInternaSi.style.display = 'none';
+                detallesOrdenInternaNo.style.display = 'block';
+                document.getElementById('folioOrden').required = false;
+                document.getElementById('descripcionServicio').required = false;
+                document.getElementById('nombreProyecto').required = true;
+                document.getElementById('ingresoProyecto').required = true;
+                document.getElementById('costoProyecto').required = true;
+                resetDetallesOrdenInterna();
+            }
+        }
+    
+        // Función para resetear los campos de la opción NO
+        function resetOpcionNo() {
+            const inputs = opcionNo.querySelectorAll('input');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    input.checked = false;
+                } else {
+                    input.value = '';
+                }
+            });
+        }
+    
+        // Función para resetear los campos de orden interna
+        function resetOrdenInterna() {
+            const ordenRadios = document.querySelectorAll('input[name="ordenInterna"]');
+            ordenRadios.forEach(radio => radio.checked = false);
+        }
+    
+        // Función para resetear los detalles de orden interna
+        function resetDetallesOrdenInterna() {
+            document.getElementById('folioOrden').value = '';
+            document.getElementById('descripcionServicio').value = '';
+        }
+    
+        // Agregar función para resetear los campos cuando la respuesta es No
+        function resetDetallesOrdenInternaNo() {
+            document.getElementById('nombreProyecto').value = '';
+            document.getElementById('ingresoProyecto').value = '';
+            document.getElementById('costoProyecto').value = '';
+            document.getElementById('nombreProyecto').required = false;
+            document.getElementById('ingresoProyecto').required = false;
+            document.getElementById('costoProyecto').required = false;
+        }
+    
+        // Event listeners
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', handleRadioChange);
+        });
+    
+        const ordenInternaRadios = document.querySelectorAll('input[name="ordenInterna"]');
+        ordenInternaRadios.forEach(radio => {
+            radio.addEventListener('change', handleOrdenInternaChange);
+        });
+    
+        const entregaRadios = document.querySelectorAll('input[name="entregaRealizada"]');
+        const documentosEntregaSi = document.getElementById('documentosEntregaSi');
+        const documentosEntregaNo = document.getElementById('documentosEntregaNo');
+    
+        // Función para manejar el cambio en los radio buttons de entrega
+        function handleEntregaChange(e) {
+            if (e.target.value === 'si') {
+                documentosEntregaSi.style.display = 'block';
+                documentosEntregaNo.style.display = 'none';
+                resetDocumentosNo();
+            } else {
+                documentosEntregaSi.style.display = 'none';
+                documentosEntregaNo.style.display = 'block';
+                resetDocumentosSi();
+            }
+        }
+    
+        // Función para resetear los campos de documentos cuando es SI
+        function resetDocumentosSi() {
+            const inputs = documentosEntregaSi.querySelectorAll('input[type="file"]');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+        }
+    
+        // Función para resetear los campos de documentos cuando es NO
+        function resetDocumentosNo() {
+            const inputs = documentosEntregaNo.querySelectorAll('input[type="file"]');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+        }
+    
+        // Event listeners
+        entregaRadios.forEach(radio => {
+            radio.addEventListener('change', handleEntregaChange);
+        });
+    });
+    
+</script>
+
+<style>
+    /* Al inicio del archivo, agregaremos un estilo base para todo el documento */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://raw.githubusercontent.com/BrianArian/www/refs/heads/master/solarpanels.jpg'); /* Ajusta la ruta según tu estructura de carpetas */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 1040px;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustar el h1 para que quede dentro del contenedor */
+.form-container h1 {
+    margin-top: 0;
+}
+
+/* Ajustar el formulario para que se ajuste al nuevo contenedor */
+form {
+    max-width: 100%;
+    padding: 0;
+}
+
+.form-group {
+    margin: 15px 0;
+}
+
+.question {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.toggle-container {
+    display: flex;
+    gap: 10px;
+}
+
+.toggle-container input[type="radio"] {
+    display: none;
+}
+
+.toggle-button {
+    padding: 10px 30px;
+    background-color: #e0e0e0;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-container input[type="radio"]:checked + .toggle-button {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+/* Estilos básicos para el formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #ed4135;
+    padding: 15px;
+    border: 2px solid #ed4135;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(237, 65, 53, 0.2);
+    max-width: 780px;
+    margin: 20px auto;
+}
+
+select {
+    width: 98%;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+    background-color: white;
+}
+
+.checkbox-group {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.docs-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.doc-item {
+    margin-bottom: 15px;
+}
+
+.contact-info {
+    border: 2px solid #999;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+.contact-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 98%;
+    margin: 0 auto;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.input-group label {
+    color: #555;
+    font-size: 0.95em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: 98%;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.orden-interna-info {
+    border: 2px solid #999;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.orden-interna-info legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+textarea {
+    width: 98%;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.documentos-info {
+    border: 2px solid #999;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.documentos-info legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+.upload-instruction {
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.file-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.file-group label {
+    color: #555;
+    font-weight: 500;
+}
+
+input[type="file"] {
+    padding: 8px;
+    border: 1px dashed #999;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    background-color: #f0f0f0;
+    border-color: #666;
+}
+
+.submit-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.submit-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+input[type="number"] {
+    width: 98%;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+/* Ocultar las flechas de incremento/decremento en Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Ocultar las flechas de incremento/decremento en Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.user-email-container {
+    background-color: #f8f9fa;
+    padding: 12px 15px;
+    border-left: 3px solid #ed4135;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.user-email-wrapper {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.user-email-container label {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.user-email-container input[type="email"] {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.user-email-container input[type="email"]:focus {
+    border-color: #ed4135;
+    box-shadow: 0 0 0 3px rgba(237, 65, 53, 0.1);
+    outline: none;
+}
+
+.form-divider {
+    height: 1px;
+    background: linear-gradient(to right, #ed4135, transparent);
+    margin: 20px 0;
+    opacity: 0.2;
+}
+
+</style>
