@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+  
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://raw.githubusercontent.com/BrianArian/www/refs/heads/master/renewable-1989416_1280%20(1).jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .form-wrapper {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 50px;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+      max-width: 700px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  
+    form div {
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+  
+    input[type="text"],
+    input[type="file"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.2s ease-in-out;
+    }
+  
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #ED4036;
+      outline: none;
+    }
+  
+    input[type="radio"] {
+      margin-right: 6px;
+    }
+  
+    button[type="submit"] {
+      background-color: #ED4036;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #c1352e;
+    }
+  
+    @media (max-width: 500px) {
+      .form-wrapper {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+  <script>
+    // Función para leer parámetros de la URL
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+  
+    // Al cargar, insertar el email si viene en la URL
+    window.addEventListener('DOMContentLoaded', () => {
+      const email = getQueryParam('email');
+      if (email) {
+        const input = document.querySelector('input[name="Q20"]');
+        if (input) input.value = email;
+      }
+    });
+  </script>
+  
+
+<body>
+
+    <div class="form-wrapper">
+        <img src="https://raw.githubusercontent.com/BrianArian/www/refs/heads/master/ammper-logo.png" alt="Logo Ammper" style="width: 280px; max-width: 100%; height: auto; display: block; margin: 0 auto 20px;">
+        <h1 style="text-align: center; font-size: 28px; color: #2c3e50; margin-bottom: 30px;">
+            Tickets Ammper
+          </h1>
+        <form id="formulario">
+
+            <div id="Q20">
+                <p>Ingresa tú email*</p>
+                <input type="text" name="Q20" placeholder="Escriba su respuesta">
+            </div>
+
+            <div id="Q1">
+                <p>Relacionado con *</p>
+                <input type="radio" name="Q1" value="Digital"> Digital<br>
+                <input type="radio" name="Q1" value="Juridico"> Jurídico<br>
+                <input type="radio" name="Q1" value="Mantenimiento"> Mantenimiento Oficina<br>
+                <input type="radio" name="Q1" value="SAP"> SAP<br>
+                <input type="radio" name="Q1" value="Talentu"> Talentu<br>
+                <input type="radio" name="Q1" value="Ticket"> Ticket CFE<br>
+            </div>
+
+            <div id="Q2">
+                <p>Área a la que perteneces *</p>
+                <input type="radio" name="Q2" value="Ammper USA"> Ammper USA<br>
+                <input type="radio" name="Q2" value="Comercial y de Nuevos Negocios"> Comercial y de Nuevos Negocios<br>
+                <input type="radio" name="Q2" value="Digital"> Digital<br>
+                <input type="radio" name="Q2" value="Dirección General"> Dirección General<br>
+                <input type="radio" name="Q2" value="ESG"> ESG<br>
+                <input type="radio" name="Q2" value="Finanzas"> Finanzas<br>
+                <input type="radio" name="Q2" value="Ingeniería y Operaciones"> Ingeniería y Operaciones<br>
+                <input type="radio" name="Q2" value="Jurídico"> Jurídico<br>
+                <input type="radio" name="Q2" value="Portafolio"> Portafolio<br>
+                <input type="radio" name="Q2" value="Recursos Humanos"> Recursos Humanos<br>
+            </div>
+
+            <div id="Q3">
+                <p>Área a la que perteneces - Mantenimiento *</p>
+                <input type="radio" name="Q3" value="Ammper USA"> Ammper USA<br>
+                <input type="radio" name="Q3" value="Comercial y de Nuevos Negocios"> Comercial y de Nuevos Negocios<br>
+                <input type="radio" name="Q3" value="Digital"> Digital<br>
+                <input type="radio" name="Q3" value="Finanzas"> Finanzas<br>
+                <input type="radio" name="Q3" value="Dirección General"> Dirección General<br>
+                <input type="radio" name="Q3" value="ESG"> ESG<br>
+                <input type="radio" name="Q3" value="Ingeniería y Operaciones"> Ingeniería y Operaciones<br>
+                <input type="radio" name="Q3" value="Jurídico"> Jurídico<br>
+                <input type="radio" name="Q3" value="Portafolio"> Portafolio<br>
+                <input type="radio" name="Q3" value="Recursos Humanos"> Recursos Humanos<br>
+            </div>
+
+            <div id="Q4">
+                <p>Categoría TI *</p>
+                <input type="radio" name="Q4" value="Aplicación/Software"> Aplicación/Software<br>
+                <input type="radio" name="Q4" value="Cyberseguridad"> Cyberseguridad<br>
+                <input type="radio" name="Q4" value="Redes/Infraestructura"> Redes/Infraestructura<br>
+                <input type="radio" name="Q4" value="Sala de Juntas"> Sala de Juntas<br>
+                <input type="radio" name="Q4" value="Soporte Digital"> Soporte Digital<br>
+                <input type="radio" name="Q4" value="Telefonía"> Telefonía<br>
+                <input type="radio" name="Q4" value="Atenea"> Power Sphere <br>
+                <input type="radio" name="Q4" value="Otro"> Otro<br>
+            </div>
+
+            <div id="Q5">
+                <p>Tipo de documento *</p>
+                <input type="radio" name="Q5" value="Contratos"> Contratos<br>
+                <input type="radio" name="Q5" value="Escritos"> Escritos<br>
+                <input type="radio" name="Q5" value="Gobierno Corporativo"> Gobierno Corporativo<br>
+                <input type="radio" name="Q5" value="Modificatorios"> Modificatorios<br>
+                <input type="radio" name="Q5" value="NDA"> NDA<br>
+                <input type="radio" name="Q5" value="RUC"> RUC<br>
+                <input type="radio" name="Q5" value="Otros"> Otros<br>
+            </div>
+
+            <div id="Q6">
+                <p>Relacionado SAP *</p>
+                <input type="radio" name="Q6" value="Reseteo/Desbloqueo de Contraseña"> Reseteo/Desbloqueo de Contraseña<br>
+                <input type="radio" name="Q6" value="Falta de autorización a transacciones"> Falta de autorización a
+                transacciones<br>
+                <input type="radio" name="Q6" value="Errores con solicitudes de pedido"> Errores con solicitudes de
+                pedido<br>
+                <input type="radio" name="Q6" value="Facturación CENACE"> Facturación CENACE<br>
+                <input type="radio" name="Q6" value="Timbrado de documentos"> Timbrado de documentos<br>
+                <input type="radio" name="Q6" value="Alta de usuario"> Alta de usuario<br>
+                <input type="radio" name="Q6" value="Problemas de nómina"> Problemas de nómina<br>
+                <input type="radio" name="Q6" value="Otros"> Otros<br>
+            </div>
+
+            <div id="Q7">
+                <p>Problemas de nómina *</p>
+                <input type="radio" name="Q7" value="Cálculo"> Cálculo<br>
+                <input type="radio" name="Q7" value="Contabilización"> Contabilización<br>
+                <input type="radio" name="Q7" value="Timbrado"> Timbrado<br>
+                <input type="radio" name="Q7" value="Otros"> Otros<br>
+            </div>
+
+            <div id="Q8">
+                <p>ID ingreso *</p>
+                <input type="text" name="Q8" placeholder="Escriba su respuesta">
+            </div>
+
+            <div id="Q9">
+                <p>Categoría *</p>
+                <input type="radio" name="Q9" value="Clientes"> Clientes<br>
+                <input type="radio" name="Q9" value="Enerpyme"> Enerpyme<br>
+                <input type="radio" name="Q9" value="Intercompañías"> Intercompañías<br>
+                <input type="radio" name="Q9" value="Proveedores"> Proveedores<br>
+                <input type="radio" name="Q9" value="Bancos"> Bancos<br>
+            </div>
+
+            <div id="Q10">
+                <p>Relacionado con Talentu *</p>
+                <input type="radio" name="Q10" value="Aclaración de vacaciones"> Aclaración de vacaciones<br>
+                <input type="radio" name="Q10" value="No puedo acceder a Talentu"> No puedo acceder a Talentu<br>
+                <input type="radio" name="Q10" value="Problemas con ausencias"> Problemas con ausencias<br>
+                <input type="radio" name="Q10" value="Otros"> Otros<br>
+            </div>
+
+            <div id="Q11">
+                <p>Número de empleado *</p>
+                <input type="text" name="Q11" placeholder="Escriba su respuesta">
+            </div>
+
+            
+
+            <div id="Q13">
+                <p>Pregunta *</p>
+                <input type="text" name="Q13" placeholder="Escriba su respuesta">
+            </div>
+            <div id="Q19">
+                <p>Descripción Mantenimiento *</p>
+                <input type="text" name="Q19" placeholder="Ingrese texto">
+                <textarea name="" id=""></textarea>
+
+            </div>
+
+            <div id="Q14">
+                <p>Descripción *</p>
+                <input type="text" name="Q14" placeholder="Escriba su respuesta">
+            </div>
+
+            <div id="Q15">
+                <p>Descripción Talentu *</p>
+                <input type="text" name="Q15" placeholder="Escriba su respuesta">
+            </div>
+
+            <div id="Q12">
+                <p>Enlistar transacciones *</p>
+                <input type="text" name="Q12" placeholder="Escriba su respuesta">
+            </div>
+
+            <div id="Q16">
+                <p>Ubicación Reportada *</p>
+                <input type="radio" name="Q16" value="Ciudad de México"> Ciudad de México<br>
+                <input type="radio" name="Q16" value="Querétaro"> Querétaro<br>
+                <input type="radio" name="Q16" value="USA"> USA<br>
+            </div>
+
+            <div id="Q17">
+                <p>Adjunta enlace compartido de OneDrive (sin datos personales) *</p>
+                <input type="text" name="Q17" placeholder="Escriba su respuesta">
+
+            </div>
+
+            <div id="Q18">
+                <p>Adjunta evidencia (Drive, etc.) *</p>
+                <input type="file" name="Q18">
+            </div>
+
+            
+
+            <div id="SubmitButtons" style="display:none; margin-top:20px;">
+                <button type="submit">Enviar Formulario</button>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+<script>
+    // Oculta todos los pasos excepto Q1
+    function hideAllExceptQ1() {
+        const steps = ['Q2', 'Q3', 'Q5', 'Q6', 'Q10', 'SubmitButtons'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Al iniciar: ocultar todo
+    hideAllExceptQ1();
+
+    // Detectar selección en Q1
+    document.querySelectorAll('input[name="Q1"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideAllExceptQ1(); // Oculta todos
+
+            switch (this.value) {
+                case 'Digital':
+                    document.getElementById('Q2').style.display = 'block';
+                    break;
+                case 'Juridico':
+                    document.getElementById('Q5').style.display = 'block';
+                    break;
+                case 'Mantenimiento':
+                    document.getElementById('Q3').style.display = 'block';
+                    break;
+                case 'SAP':
+                    document.getElementById('Q6').style.display = 'block';
+                    break;
+                case 'Talentu':
+                    document.getElementById('Q10').style.display = 'block';
+                    break;
+                case 'Ticket':
+                    document.getElementById('SubmitButtons').style.display = 'block';
+                    break;
+            }
+        });
+    });
+</script>
+
+<script>
+    // Oculta todo excepto Q1 y Q2
+    function hideAllExceptQ1Q2() {
+        const steps = ['Q3', 'Q4', 'Q5', 'Q6', 'Q10', 'Q14', 'Q17', 'Q18', 'SubmitButtons'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    hideAllExceptQ1Q2();
+
+    // Detectar selección en Q2
+    document.querySelectorAll('input[name="Q2"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideAllExceptQ1Q2(); // Oculta todo menos Q1 y Q2
+            document.getElementById('Q4').style.display = 'block'; // Siempre muestra Q4
+        });
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q3
+    function hideQ3Relations() {
+        const steps = ['Q14', 'Q19'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ3Relations();
+
+    // Detectar selección en Q3
+    document.querySelectorAll('input[name="Q3"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideQ3Relations(); // Oculta lo demás
+            document.getElementById('Q19').style.display = 'block'; // Siempre muestra Q19
+        });
+    });
+</script>
+
+<script>
+    // Ocultar todo excepto Q1, Q2, Q3 y Q4
+    function hideAllExceptQ1Q2Q3Q4() {
+        const steps = ['Q5', 'Q6', 'Q10', 'Q14', 'Q17', 'Q18', 'SubmitButtons'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Detectar selección en Q4
+    document.querySelectorAll('input[name="Q4"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideAllExceptQ1Q2Q3Q4(); // Oculta todo lo demás
+            document.getElementById('Q14').style.display = 'block'; // Muestra Q14
+        });
+    });
+</script>
+
+<script>
+    // Ocultar solo Q9 y Q14 que son las relacionadas a Q5
+    function hideQ5Relations() {
+        const steps = ['Q9', 'Q14'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Al iniciar que estén ocultas
+    hideQ5Relations();
+
+    // Detectar selección en Q5
+    document.querySelectorAll('input[name="Q5"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideQ5Relations(); // Oculta Q9 y Q14 siempre que seleccionen algo nuevo
+
+            const toQ9 = ['Contratos', 'Modificatorios', 'RUC'];
+            if (toQ9.includes(this.value)) {
+                document.getElementById('Q9').style.display = 'block';
+            } else {
+                document.getElementById('Q14').style.display = 'block';
+            }
+        });
+    });
+</script>
+
+<script>
+    // Ocultar solo las relacionadas a Q6
+    function hideQ6Relations() {
+        const steps = ['Q7', 'Q8', 'Q14'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ6Relations();
+
+    // Detectar selección en Q6
+    document.querySelectorAll('input[name="Q6"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideQ6Relations();
+
+            switch (this.value) {
+                case 'No puedo acceder a SAP':
+                    document.getElementById('Q8').style.display = 'block';
+                    break;
+                case 'Problemas de nómina':
+                    document.getElementById('Q7').style.display = 'block';
+                    break;
+                default:
+                    document.getElementById('Q14').style.display = 'block';
+                    break;
+            }
+        });
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q7
+    function hideQ7Relations() {
+        const steps = ['Q14'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ7Relations();
+
+    // Detectar selección en Q7
+    document.querySelectorAll('input[name="Q7"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideQ7Relations(); // Oculta lo demás
+            document.getElementById('Q14').style.display = 'block'; // Siempre muestra Q14
+        });
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q8
+    function hideQ8Relations() {
+        const steps = ['Q14'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ8Relations();
+
+    // Detectar escritura en Q8
+    const inputQ8 = document.querySelector('input[name="Q8"]');
+    inputQ8.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            hideQ8Relations();
+            document.getElementById('Q14').style.display = 'block';
+        } else {
+            hideQ8Relations(); // Si borran el texto, vuelve a ocultar
+        }
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q9
+    function hideQ9Relations() {
+        const steps = ['Q14'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ9Relations();
+
+    // Detectar selección en Q9
+    document.querySelectorAll('input[name="Q9"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideQ9Relations(); // Oculta lo demás
+            document.getElementById('Q14').style.display = 'block'; // Siempre muestra Q14
+        });
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q10
+    function hideQ10Relations() {
+        const steps = ['Q11', 'Q12'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ10Relations();
+
+    // Detectar selección en Q10
+    document.querySelectorAll('input[name="Q10"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideQ10Relations(); // Oculta lo demás
+
+            if (this.value === 'No puedo acceder a Talentu') {
+                document.getElementById('Q11').style.display = 'block';
+            } else {
+                document.getElementById('Q12').style.display = 'block';
+            }
+        });
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q11
+    function hideQ11Relations() {
+        const steps = ['Q14'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ11Relations();
+
+    // Detectar escritura en Q11
+    const inputQ11 = document.querySelector('input[name="Q11"]');
+    inputQ11.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            hideQ11Relations();
+            document.getElementById('Q14').style.display = 'block';
+        } else {
+            hideQ11Relations(); // Si borran el texto → ocultar de nuevo
+        }
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q12
+    function hideQ12Relations() {
+        const steps = ['Q15'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ12Relations();
+
+    // Detectar escritura en Q12
+    const inputQ12 = document.querySelector('input[name="Q12"]');
+    inputQ12.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            hideQ12Relations();
+            document.getElementById('Q15').style.display = 'block';
+        } else {
+            hideQ12Relations(); // Si borran el texto, vuelve a ocultar
+        }
+    });
+</script>
+
+<script>
+    // Ocultar siempre Q13 al cargar
+    document.addEventListener('DOMContentLoaded', function () {
+        const q13 = document.getElementById('Q13');
+        if (q13) {
+            q13.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q14
+    function hideQ14Relations() {
+        const steps = ['Q17'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ14Relations();
+
+    // Detectar escritura en Q14
+    const inputQ14 = document.querySelector('input[name="Q14"]');
+    inputQ14.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            hideQ14Relations();
+            document.getElementById('Q17').style.display = 'block';
+        } else {
+            hideQ14Relations(); // Si borran → ocultar Q17
+        }
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q15
+    function hideQ15Relations() {
+        const steps = ['Q18'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ15Relations();
+
+    // Detectar escritura en Q15
+    const inputQ15 = document.querySelector('input[name="Q15"]');
+    inputQ15.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            hideQ15Relations();
+            document.getElementById('Q18').style.display = 'block';
+        } else {
+            hideQ15Relations(); // Si borran → ocultar Q18
+        }
+    });
+</script>
+
+<script>
+    // Ocultar al inicio
+    function hideQ16Relations() {
+        document.getElementById('Q18').style.display = 'none';
+    }
+
+    hideQ16Relations();
+
+    // Detectar selección en Q16
+    document.querySelectorAll('input[name="Q16"]').forEach(input => {
+        input.addEventListener('change', function () {
+            hideQ16Relations(); // Oculta primero por si acaso
+            document.getElementById('Q18').style.display = 'block'; // Muestra Q18
+        });
+    });
+</script>
+
+<script>
+    function hideQ17Relations() {
+        document.getElementById('SubmitButtons').style.display = 'none';
+    }
+
+    hideQ17Relations(); // Ocultar al inicio
+
+    const inputQ17 = document.querySelector('input[name="Q17"]');
+    inputQ17.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            document.getElementById('SubmitButtons').style.display = 'block';
+        } else {
+            hideQ17Relations(); // Si borran → ocultar botón
+        }
+    });
+</script>
+<script>
+    // Ocultar solo lo relacionado a Q18
+    function hideQ18Relations() {
+        const steps = ['SubmitButtons'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ18Relations();
+
+    // Detectar carga de archivo en Q18
+    const inputQ18 = document.querySelector('input[name="Q18"]');
+    inputQ18.addEventListener('change', function () {
+        if (this.files.length > 0) {
+            hideQ18Relations();
+            document.getElementById('SubmitButtons').style.display = 'block';
+        } else {
+            hideQ18Relations(); // Si eliminan archivo → ocultar SubmitButtons
+        }
+    });
+</script>
+
+<script>
+    // Ocultar solo lo relacionado a Q19
+    function hideQ19Relations() {
+        const steps = ['Q16'];
+        steps.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // Ocultar al inicio
+    hideQ19Relations();
+
+    // Detectar escritura en Q19
+    const inputQ19 = document.querySelector('input[name="Q19"]');
+    inputQ19.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            hideQ19Relations();
+            document.getElementById('Q16').style.display = 'block';
+        } else {
+            hideQ19Relations(); // Si borran → ocultar Q16
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('formulario').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Función para convertir archivo a base64
+        const fileToBase64 = file => {
+            return new Promise((resolve) => {
+                if (!file || file.size === 0) {
+                    resolve(null);
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.readAsDataURL(file);
+            });
+        };
+
+        const file18 = formData.get('Q18');
+        const file18Base64 = await fileToBase64(file18);
+
+        // Crear payload básico
+        const payload = {
+            Q1: formData.get('Q1'),
+            Q2: formData.get('Q2'),
+            Q3: formData.get('Q3'),
+            Q4: formData.get('Q4'),
+            Q5: formData.get('Q5'),
+            Q6: formData.get('Q6'),
+            Q7: formData.get('Q7'),
+            Q8: formData.get('Q8'),
+            Q9: formData.get('Q9'),
+            Q10: formData.get('Q10'),
+            Q11: formData.get('Q11'),
+            Q12: formData.get('Q12'),
+            Q13: formData.get('Q13'),
+            Q14: formData.get('Q14'),
+            Q15: formData.get('Q15'),
+            Q16: formData.get('Q16'),
+            Q17: formData.get('Q17'),
+            Q19: formData.get('Q19'),
+            Q20: formData.get('Q20')
+
+        };
+
+        // Incluir archivo si se subió
+        if (file18 && file18Base64) {
+            payload.archivos = {
+                Q18: {
+                    fileName: file18.name,
+                    fileType: file18.type,
+                    fileContent: file18Base64
+                }
+            };
+        }
+
+        // Enviar al endpoint de Power Automate
+        try {
+            const response = await fetch("https://prod-107.westus.logic.azure.com:443/workflows/94af0aba0b9549619f6ca3e871412abb/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=m95ClRogKK2rcLJOaK9j6rpRbS0ZGQ2L9W_gJrfD_S0", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                await Swal.fire({
+                    icon: 'success',
+                    title: '¡Formulario enviado!',
+                    text: 'Tus respuestas se han recibido correctamente.',
+                    confirmButtonText: 'Cerrar',
+                    confirmButtonColor: '#3085d6'
+                });
+
+                // Limpiar y recargar el formulario
+                form.reset();
+                location.reload();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al enviar',
+                    text: 'No se pudo enviar el formulario. Intenta más tarde.',
+                    confirmButtonText: 'Cerrar'
+                });
+            }
+        } catch (e) {
+            console.error('❌ Error al enviar:', e);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error inesperado',
+                text: 'Hubo un problema al enviar el formulario.',
+                confirmButtonText: 'Cerrar'
+            });
+        }
+    });
+</script>
+
+
+
+
+</html>
